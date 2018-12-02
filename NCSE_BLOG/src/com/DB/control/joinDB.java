@@ -82,6 +82,7 @@ public class joinDB {
 			.append("sex", sex)
 			.append("user_email", email)
 			.append("phone_number", ph)
+			.append("user_authority", false)
 			//.append("address", address)
 			.append("platform_link", platform_link)
 			.append("self_imp",self_imp);

@@ -63,13 +63,16 @@ public class loginCheck_DB {
 	         System.out.println("가입권환 확인중...");
 	         JSONParser jsonParser = new JSONParser();
 	         JSONObject jsonObject;
-	         String result;
+	         boolean result;
 	         
 	            jsonObject = (JSONObject) jsonParser.parse(temp);
-	            result = jsonObject.get("user_authority").toString();
+	            result = (boolean)jsonObject.get("user_authority");
 	            
-	            if(result.equalsIgnoreCase("1.0"))
+	            if(result == false)
+	            {
 	            	Validity=true;
+	            	System.out.println("계정발견");
+	            }
 	            else
 	            	System.out.println("조회안됨");
 	         
