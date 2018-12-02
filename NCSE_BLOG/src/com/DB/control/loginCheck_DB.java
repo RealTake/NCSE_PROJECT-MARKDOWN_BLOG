@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.bson.Document;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
@@ -20,7 +24,7 @@ public class loginCheck_DB {
 	MongoClient mongoClient;
 	MongoDatabase DB;
 	MongoCollection<Document> documentMongoCollection;
-	
+	Iterator<Document> i;
 	public loginCheck_DB(String id, String pw) 
 	{
 		this.id = id;
@@ -52,6 +56,30 @@ public class loginCheck_DB {
 		return false;
 	}
 	
+	public boolean checkPermission(String temp) 
+	   {
+	      try
+	      {
+	         System.out.println("가입권환 확인중...");
+	         JSONParser jsonParser = new JSONParser();
+	         JSONObject jsonObject;
+	         String result;
+	         
+	            jsonObject = (JSONObject) jsonParser.parse(temp);
+	            result = jsonObject.get("user_authority").toString();
+	            
+	            if(result.equalsIgnoreCase("1.0"))
+	            	Validity=true;
+	            else
+	            	System.out.println("조회안됨");
+	         
+	      } catch (ParseException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	         return true;
+	      }
+	      return false;
+	   }
 	
 	public boolean getValidity(){
 		return Validity;
@@ -70,23 +98,13 @@ public class loginCheck_DB {
 			//System.out.println(andQuery.toString());
 			//DB조회
 			FindIterable<Document> cursor = documentMongoCollection.find(andQuery);
-			Iterator<Document> i = cursor.iterator();
+			 i = cursor.iterator();
 			while(i.hasNext())
 			{
-				String temp = i.next().toString();
+				String temp = i.next().toJson();
 				System.out.println(temp);
 				
-				if(temp.toString().substring(0,8).equals("Document"))
-				{
-					Validity = true;
-					System.out.println("계정 발견");
-					break;
-				}
-				else
-				{
-					System.out.println("게정을 발견 불가");
-					break;
-				}
+				checkPermission(temp);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
