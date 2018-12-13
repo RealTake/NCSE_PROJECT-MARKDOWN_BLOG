@@ -10,8 +10,11 @@
 <%
 	String id = request.getParameter("id");
 
+	if(id != null)
+	{
 	session.setAttribute("user_id", id);
 	response.sendRedirect("Main.html");
+	}
 %>
 </body>
 </html>
