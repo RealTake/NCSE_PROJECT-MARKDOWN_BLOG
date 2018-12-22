@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.command.BCommand;
+import com.back.command.*;
+
 
 /**
  * Servlet implementation class mainControl
@@ -31,8 +32,7 @@ public class mainControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//actionDo(request, response);
-		System.out.println("ihihih");
+		actionDo(request, response, "get");
 	}
 
 	/**
@@ -40,36 +40,65 @@ public class mainControl extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		actionDo(request, response);
+		actionDo(request, response, "post");
 	}
 
-	private void actionDo(HttpServletRequest req, HttpServletResponse res){
+	private void actionDo(HttpServletRequest req, HttpServletResponse res, String method){
 		res.setCharacterEncoding("EUC-KR");
 		
-		//String viewPage = null;
-		//BCommand command = null;
+		String viewPage = null;
+		BCommand command = null;
 		
 		String uri = req.getRequestURI();
 		System.out.println("요청uri: " + uri);
-		String contextPath = res.getContentType();
+		String contextPath = req.getContextPath();
 		System.out.println("컨텍스트 패스: " + contextPath);
 		String com = uri.substring(contextPath.length());
 		System.out.println("요청 커맨드: " + com);
 		
-//		switch(com)
-//		{
-//		
-//		case "/board.do" :
-//			System.out.println("포론트 컨트롤러 작동");
-//			command = new BoardCommand();
-//			command.excute(req, res);
-//			viewPage = "/board";
-//			break;
-//			
-//		}
+		switch(com)
+		{
 		
-		//RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
-		//dispatcher.forward(req, res);
+		case "/login.do" :// 나중에 post에서만 동작하게 하자
+			System.out.println(com + " 작동");
+			command = new Login_BC();
+			command.excute(req, res);
+			viewPage = "loginCheck.jsp";
+			break;
+			
+		case "/join.do" :
+			System.out.println(com + " 작동");
+			command = new Join_BC();
+			command.excute(req, res);
+			viewPage = "NewFile.html";
+			break;
+			
+		case "/board.do" :
+			System.out.println(com + " 작동");
+			command = new Board_BC();
+			command.excute(req, res);
+			viewPage = "/board";
+			break;
+		
+		case "/private.do" :
+			System.out.println(com + " 작동");
+			command = new private_BC();
+			command.excute(req, res);
+			viewPage = "viewPrivate.jsp";
+			break;
+			
+		}
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
+		try {
+			dispatcher.forward(req, res);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

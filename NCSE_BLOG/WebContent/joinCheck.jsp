@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" 
 	import = "com.DB.control.joinDB"
  %>
+ <jsp:useBean id="member" class="com.dto.memberDTO" scope="page"/>
+ <jsp:setProperty name="member" property="id" />
+ <jsp:setProperty name="member" property="pw" />
+ <jsp:setProperty name="member" property="pwCheck" />
+ <jsp:setProperty name="member" property="name" />
+ <jsp:setProperty name="member" property="nick" />
+ <jsp:setProperty name="member" property="email" />
+ <jsp:setProperty name="member" property="ph" />
+ <jsp:setProperty name="member" property="platform_link" />
+ <jsp:setProperty name="member" property="self_imp" />
+ <jsp:setProperty name="member" property="sex" />
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,7 +53,7 @@
 		if(join.getValidity() == true)
 		{
 			 out.print("<script>alert('회원가입이 완료 되었습니다.');</script>");
-			 out.print("<script> location.href = 'login.html'; </script>");
+			 out.print("<script> location.href = 'join.html'; </script>");
 		}
 	 }	
 	

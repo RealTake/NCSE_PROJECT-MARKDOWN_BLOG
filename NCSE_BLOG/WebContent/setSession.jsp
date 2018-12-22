@@ -8,12 +8,19 @@
 </head>
 <body>
 <%
+	String s_id = session.getAttribute("user_id").toString();
 	String id = request.getParameter("id");
-
-	if(id != null)
+	
+	if(s_id != null)
+		response.sendRedirect("Main.html");
+	else if(s_id == null)
 	{
-	session.setAttribute("user_id", id);
-	response.sendRedirect("Main.html");
+		if(id != null)
+		{
+			session.setAttribute("user_id", id);
+			response.sendRedirect("Main.html");
+	
+		}
 	}
 %>
 </body>

@@ -8,18 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <%!
-final int MAX = 15, MIN = 4;
+	final int MAX = 15, MIN = 4;
 %>
 
 <%
+	boolean authority = (Boolean)(request.getAttribute("authority"));
+
 	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
-	
+	String pw = request.getParameter("pw");		
 	String login ="NewFile.html";
-	loginCheck_DB check;
-	
-	if(id == null || pw == null)
+		
+	if(id == null || id.equals("") || pw == null || pw.equals(""))
 	{
 		out.print("<script> alert('아이디 또는 패스워드를 입력해주세요.'); </script>");
 		out.println("<script> location.href = '"+login+"'; </script>");
@@ -31,23 +32,20 @@ final int MAX = 15, MIN = 4;
 	}
 	else
 	{
-		check = new loginCheck_DB(id, pw);
-		
-		if(check.getValidity() == true)
+		if(authority == true)
 		{
-			out.print("<script> alert('성공'); </script>");
 			%>
-			
-			<jsp:forward page="setSession.jsp">
-    			<jsp:param name="id" value="<%= id %>" />
-			</jsp:forward>
-			
+				<jsp:forward page="setSession.jsp"></jsp:forward>
 			<%
 		}
 		else
-			response.sendRedirect(login);
+		{
+			out.println("<script>alert('승인 되지않은 계정이거나 그런 계정이 존제하지 않습니다');</script>");
+			out.print("<script> location.href = 'NewFile.html'; </script>");
+		}
+		out.println("이동성공");
+		out.println(authority);
 	}
-		
 %>
 
 
