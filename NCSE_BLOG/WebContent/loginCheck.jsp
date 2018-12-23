@@ -14,12 +14,10 @@
 %>
 
 <%
-	boolean authority = (Boolean)(request.getAttribute("authority"));
-
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");		
 	String login ="NewFile.html";
-		
+	
 	if(id == null || id.equals("") || pw == null || pw.equals(""))
 	{
 		out.print("<script> alert('아이디 또는 패스워드를 입력해주세요.'); </script>");
@@ -32,19 +30,10 @@
 	}
 	else
 	{
-		if(authority == true)
-		{
-			%>
-				<jsp:forward page="setSession.jsp"></jsp:forward>
-			<%
-		}
-		else
-		{
-			out.println("<script>alert('승인 되지않은 계정이거나 그런 계정이 존제하지 않습니다');</script>");
-			out.print("<script> location.href = 'NewFile.html'; </script>");
-		}
-		out.println("이동성공");
-		out.println(authority);
+			
+		%>
+			<jsp:forward page="login.do"></jsp:forward>
+		<%
 	}
 %>
 

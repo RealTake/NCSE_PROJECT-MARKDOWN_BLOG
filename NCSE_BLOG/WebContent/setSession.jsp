@@ -8,18 +8,23 @@
 </head>
 <body>
 <%
-	String s_id = session.getAttribute("user_id").toString();
 	String id = request.getParameter("id");
+	boolean authority = (Boolean)(request.getAttribute("authority"));
 	
-	if(s_id != null)
+	if(session.getAttribute("user_id") != null)
 		response.sendRedirect("Main.html");
-	else if(s_id == null)
+	else
 	{
-		if(id != null)
+		if(id != null && authority == true)
 		{
 			session.setAttribute("user_id", id);
 			response.sendRedirect("Main.html");
 	
+		}
+		else
+		{
+			out.println("<script>alert('승인 되지않은 계정이거나 그런 계정이 존제하지 않습니다');</script>");
+			out.println("<script> location.href = 'NewFile.html'; </script>");
 		}
 	}
 %>

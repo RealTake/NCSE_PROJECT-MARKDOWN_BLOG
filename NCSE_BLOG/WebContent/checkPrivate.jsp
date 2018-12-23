@@ -1,3 +1,6 @@
+<%@page import="javax.websocket.Session"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -5,16 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-test2
-<form method="post" action="loginCheck.jsp">
-
-<input type="text" name="id" >
+test<br/>
+<%
+	out.print(session.getAttribute("user_id"));
+%>
+<form method="post" action="private.do">
+<input type="text" name="id" value="${user_id}" >
 <input type="password" name="pw" >
 <input type="submit" value="전송">
-<input type="button" value="로그아웃" onclick="location.href='http://localhost:8181/NCSE_BLOG/logOut.jsp'">
 </form>
 
-<a href="board.do">게시판</a>
-<a href="checkPrivate.jsp">개인정보</a>
 </body>
 </html>
