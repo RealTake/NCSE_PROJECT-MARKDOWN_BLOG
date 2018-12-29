@@ -1,4 +1,4 @@
-package com.DB.control;
+package com.member.dao;
 
 import org.json.*;
 import org.json.simple.JSONObject;

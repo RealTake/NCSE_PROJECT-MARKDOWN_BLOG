@@ -1,4 +1,4 @@
-package com.DB.control;
+package com.member.dao;
 
 import com.mongodb.client.*;
 import com.mongodb.MongoClient;

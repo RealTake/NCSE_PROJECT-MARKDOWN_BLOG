@@ -19,7 +19,6 @@
 		{
 			session.setAttribute("user_id", id);
 			response.sendRedirect("Main.html");
-	
 		}
 		else
 		{

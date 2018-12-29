@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" 
-	import = "com.DB.control.joinDB"
+	import = "com.member.dao.joinDB"
  %>
- <jsp:useBean id="member" class="com.dto.memberDTO" scope="page"/>
+ <jsp:useBean id="member" class="com.member.dto.memberDTO" scope="page"/>
  <jsp:setProperty name="member" property="id" />
  <jsp:setProperty name="member" property="pw" />
  <jsp:setProperty name="member" property="pwCheck" />

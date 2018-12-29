@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.back.command.*;
+import com.board.command.*;
+import com.member.command.*;
 
 
 /**
@@ -47,7 +48,7 @@ public class mainControl extends HttpServlet {
 		res.setCharacterEncoding("EUC-KR");
 		
 		String viewPage = null;
-		BCommand command = null;
+		MCommand command = null;
 		
 		String uri = req.getRequestURI();
 		System.out.println("요청uri: " + uri);
@@ -61,28 +62,32 @@ public class mainControl extends HttpServlet {
 		
 		case "/login.do" :// 나중에 post에서만 동작하게 하자
 			System.out.println(com + " 작동");
-			command = new Login_BC();
+			System.out.println("\n\n\n");
+			command = new Login_MC();
 			command.excute(req, res);
-			viewPage = "loginCheck.jsp";
+			viewPage = "setSession.jsp";
 			break;
 			
 		case "/join.do" :
 			System.out.println(com + " 작동");
-			command = new Join_BC();
+			System.out.println("\n\n\n");
+			command = new Join_MC();
 			command.excute(req, res);
 			viewPage = "NewFile.html";
 			break;
 			
 		case "/board.do" :
 			System.out.println(com + " 작동");
-			command = new Board_BC();
-			command.excute(req, res);
-			viewPage = "/board";
+			System.out.println("\n\n\n");
+			BCommand c = new List_BC();
+			c.excute(req, res);
+			viewPage = "board.jsp";
 			break;
 		
 		case "/private.do" :
 			System.out.println(com + " 작동");
-			command = new private_BC();
+			System.out.println("\n\n\n");
+			command = new Private_MC();
 			command.excute(req, res);
 			viewPage = "viewPrivate.jsp";
 			break;

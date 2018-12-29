@@ -1,4 +1,4 @@
-package com.DB.control;
+package com.member.dao;
 
 import java.util.ArrayList;
 import java.util.Iterator;
