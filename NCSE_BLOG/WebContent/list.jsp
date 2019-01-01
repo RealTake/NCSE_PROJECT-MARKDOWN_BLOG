@@ -22,8 +22,7 @@
 		<tr>
 			<td>${dto.bId}</td>
 			<td>${dto.title}</td>
-			<td>
-				<a>${dto.id}</a></td>
+			<td><a href="content_view.do?bId=${dto.bId}&cate=PJ_board">${dto.title}</a></td>
 			<td>${dto.date}</td>
 			<td>${dto.like}</td>
 			<td>${dto.disLike}</td>

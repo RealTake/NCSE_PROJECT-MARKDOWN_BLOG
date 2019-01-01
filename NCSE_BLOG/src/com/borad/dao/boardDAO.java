@@ -1,29 +1,20 @@
 package com.borad.dao;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.bson.Document;
-import org.json.simple.JSONArray;
+import org.bson.types.ObjectId;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import sun.security.util.Length;
-
 import com.board.dto.boardDTO;
-import com.member.dao.memberDAO;
-import com.member.dto.memberDTO;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.sun.jndi.cosnaming.IiopUrl.Address;
 
 
 public class boardDAO 
@@ -98,6 +89,7 @@ public class boardDAO
 			String array = jsonObject.get(cate).toString();
 			System.out.println(cate + " 배열d: " + array);
 			String bid = jsonObject.get("_id").toString();
+			System.out.println(bid);
 			dto.setbId(bid.substring(9, bid.length() - 2));
 			
 			array = array.substring(1, array.length()-1);
@@ -108,8 +100,8 @@ public class boardDAO
 			//dto.setContent(jsonObject.get("board_contents").toString());
 			dto.setId(jsonObject.get("board_userID").toString());
 			dto.setDate(jsonObject.get("board_date").toString());
-			dto.setLike(jsonObject.get("board_like").toString());
-			dto.setDisLike(jsonObject.get("board_dislike").toString());
+			dto.setLike(new Integer(jsonObject.get("board_like").toString()));
+			dto.setDisLike(new Integer(jsonObject.get("board_dislike").toString()));
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -119,6 +111,103 @@ public class boardDAO
 		return dto;
         
 	}
+	
+	//글보기
+	public boardDTO viewContent(String bid, String cate)
+	{
+		boardDTO dto = new boardDTO();
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(bid));
+		MongoCursor<Document> it = documentMongoCollection.find(query).iterator();
+		while(it.hasNext())
+		{
+			String temp = it.next().toJson();
+			
+			try {
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObject = (JSONObject)jsonParser.parse(temp);
+				String array = jsonObject.get(cate).toString();
+				System.out.println(cate + " 배열d: " + array);
+				
+				array = array.substring(1, array.length()-1);
+				
+				//배열로 구성되어있는 글들을 파싱하기위해 이중 파싱을함
+				jsonObject = (JSONObject)jsonParser.parse(array);
+				dto.setTitle(jsonObject.get("board_header").toString());
+				dto.setContent(jsonObject.get("board_contents").toString());
+				dto.setId(jsonObject.get("board_userID").toString());
+				dto.setDate(jsonObject.get("board_date").toString());
+				dto.setLike(new Integer(jsonObject.get("board_like").toString()));
+				dto.setDisLike(new Integer(jsonObject.get("board_dislike").toString()));
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return dto;
+	}
+	
+	//글쓰기
+	public void write(boardDTO dto, String cate)
+	{
+		
+		List<BasicDBObject> board = new ArrayList<BasicDBObject>();
+		board.add(new BasicDBObject()
+		.append("board_header", "글쓰기 테스트중")
+		.append("board_contents", "입력이됬나요?")
+		.append("board_userID", "choi1234")
+		.append("board_date", "2019-01-01")
+		.append("like", 0)
+		.append("board_dislike", 0)
+		);
+		
+		
+//		BasicDBObject board = new BasicDBObject()
+//		.append("board_header", dto.getTitle())
+//		.append("board_contents", dto.getContent())
+//		.append("board_userID", dto.getId())
+//		.append("like", dto.getLike())
+//		.append("board_dislike", dto.getDisLike());
+		Document doc = new Document()
+		.append(cate, board);
+		
+		documentMongoCollection.insertOne(doc);
+	}
+	
+	
+	
+	
+	
+	
+//	public boardDTO parseView(String temp, String cate)
+//	{
+//		boardDTO dto = new boardDTO();
+//		try {
+//			JSONParser jsonParser = new JSONParser();
+//			JSONObject jsonObject = (JSONObject)jsonParser.parse(temp);
+//			String array = jsonObject.get(cate).toString();
+//			System.out.println(cate + " 배열d: " + array);
+//			
+//			array = array.substring(1, array.length()-1);
+//			
+//			//배열로 구성되어있는 글들을 파싱하기위해 이중 파싱을함
+//			jsonObject = (JSONObject)jsonParser.parse(array);
+//			dto.setTitle(jsonObject.get("board_header").toString());
+//			dto.setContent(jsonObject.get("board_contents").toString());
+//			dto.setId(jsonObject.get("board_userID").toString());
+//			dto.setDate(jsonObject.get("board_date").toString());
+//			dto.setLike(jsonObject.get("board_like").toString());
+//			dto.setDisLike(jsonObject.get("board_dislike").toString());
+//			
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return dto;
+//        
+//	}
 	
 //	public String parseJson2(String temp, String cate)
 //	{
@@ -133,10 +222,4 @@ public class boardDAO
 //		}
 //        return temp;
 //	}
-	
-	
-	
-	
-	
-	
 }

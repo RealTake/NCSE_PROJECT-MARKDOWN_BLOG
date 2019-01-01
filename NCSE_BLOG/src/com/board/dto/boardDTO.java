@@ -5,8 +5,8 @@ public class boardDTO {
 	private String content;
 	private String date;
 	private String id;
-	private String like;
-	private String disLike;
+	private int like;
+	private int disLike;
 	private String bId;
 	
 	public String getbId() {
@@ -40,16 +40,17 @@ public class boardDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getLike() {
+	
+	public int getLike() {
 		return like;
 	}
-	public void setLike(String like) {
+	public void setLike(int like) {
 		this.like = like;
 	}
-	public String getDisLike() {
+	public int getDisLike() {
 		return disLike;
 	}
-	public void setDisLike(String disLike) {
+	public void setDisLike(int disLike) {
 		this.disLike = disLike;
 	}
 }

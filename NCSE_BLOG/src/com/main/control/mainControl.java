@@ -48,7 +48,8 @@ public class mainControl extends HttpServlet {
 		res.setCharacterEncoding("EUC-KR");
 		
 		String viewPage = null;
-		MCommand command = null;
+		MCommand M = null;
+		BCommand B = null;
 		
 		String uri = req.getRequestURI();
 		System.out.println("요청uri: " + uri);
@@ -63,32 +64,48 @@ public class mainControl extends HttpServlet {
 		case "/login.do" :// 나중에 post에서만 동작하게 하자
 			System.out.println(com + " 작동");
 			System.out.println("\n\n\n");
-			command = new Login_MC();
-			command.excute(req, res);
+			M = new Login_MC();
+			M.excute(req, res);
 			viewPage = "setSession.jsp";
 			break;
 			
 		case "/join.do" :
 			System.out.println(com + " 작동");
 			System.out.println("\n\n\n");
-			command = new Join_MC();
-			command.excute(req, res);
+			M = new Join_MC();
+			M.excute(req, res);
 			viewPage = "NewFile.html";
 			break;
 			
 		case "/board.do" :
 			System.out.println(com + " 작동");
 			System.out.println("\n\n\n");
-			BCommand c = new List_BC();
-			c.excute(req, res);
+			B = new List_BC();
+			B.excute(req, res);
 			viewPage = "list.jsp";
 			break;
+			
+		case "/content_view.do" :
+			System.out.println(com + " 작동");
+			System.out.println("\n\n\n");
+			B = new View_BC();
+			B.excute(req, res);
+			viewPage = "view.jsp";
+			break;
 		
+		case "/write.do" :
+			System.out.println(com + " 작동");
+			System.out.println("\n\n\n");
+			B = new Write_BC();
+			B.excute(req, res);
+			viewPage = "view.jsp";
+			break;
+			
 		case "/private.do" :
 			System.out.println(com + " 작동");
 			System.out.println("\n\n\n");
-			command = new Private_MC();
-			command.excute(req, res);
+			M = new Private_MC();
+			M.excute(req, res);
 			viewPage = "viewPrivate.jsp";
 			break;
 			
