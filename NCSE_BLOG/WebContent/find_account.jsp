@@ -12,7 +12,8 @@
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");
 	String id = request.getParameter("id");
-	findAccount f = new findAccount(name, email, id, "id");// 맨 마지막 매개변수는 꼭 id,pwd일것
+	String pw = request.getParameter("pw");
+	findAccount f = new findAccount(name, email, id, pw, "id");// 맨 마지막 매개변수는 꼭 id,pwd일것
 %>
 </body>
 </html>

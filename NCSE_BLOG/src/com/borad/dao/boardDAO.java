@@ -158,7 +158,7 @@ public class boardDAO
 		.append("board_contents", "입력이됬나요?")
 		.append("board_userID", "choi1234")
 		.append("board_date", "2019-01-01")
-		.append("like", 0)
+		.append("board_like", 0)
 		.append("board_dislike", 0)
 		);
 		
