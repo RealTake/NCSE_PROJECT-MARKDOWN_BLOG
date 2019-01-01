@@ -81,7 +81,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			BCommand c = new List_BC();
 			c.excute(req, res);
-			viewPage = "board.jsp";
+			viewPage = "list.jsp";
 			break;
 		
 		case "/private.do" :

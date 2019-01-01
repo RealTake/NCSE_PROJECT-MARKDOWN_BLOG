@@ -10,6 +10,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import sun.security.util.Length;
+
 import com.board.dto.boardDTO;
 import com.member.dao.memberDAO;
 import com.member.dto.memberDTO;
@@ -79,7 +81,7 @@ public class boardDAO
 		while(it.hasNext())
 		{
 			String temp = it.next().toJson();
-			dtos.add(parseJson(temp, category));
+			dtos.add(parseList(temp, category));
 		}
 		
 		return dtos;
@@ -87,20 +89,23 @@ public class boardDAO
 	}
 	
 	// 도큐먼트 파싱
-	public boardDTO parseJson(String temp, String cate)
+	public boardDTO parseList(String temp, String cate)
 	{
 		boardDTO dto = new boardDTO();
 		try {
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject)jsonParser.parse(temp);
-			String array = jsonObject.get("PJ_board").toString();
+			String array = jsonObject.get(cate).toString();
 			System.out.println(cate + " 배열d: " + array);
+			String bid = jsonObject.get("_id").toString();
+			dto.setbId(bid.substring(9, bid.length() - 2));
+			
 			array = array.substring(1, array.length()-1);
 			
 			//배열로 구성되어있는 글들을 파싱하기위해 이중 파싱을함
 			jsonObject = (JSONObject)jsonParser.parse(array);
 			dto.setTitle(jsonObject.get("board_header").toString());
-			dto.setContent(jsonObject.get("board_contents").toString());
+			//dto.setContent(jsonObject.get("board_contents").toString());
 			dto.setId(jsonObject.get("board_userID").toString());
 			dto.setDate(jsonObject.get("board_date").toString());
 			dto.setLike(jsonObject.get("board_like").toString());

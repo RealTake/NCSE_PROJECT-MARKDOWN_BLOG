@@ -7,7 +7,11 @@ public class boardDTO {
 	private String id;
 	private String like;
 	private String disLike;
+	private String bId;
 	
+	public String getbId() {
+		return bId;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -22,6 +26,10 @@ public class boardDTO {
 	}
 	public String getDate() {
 		return date;
+	}
+	
+	public void setbId(String bId) {
+		this.bId = bId;
 	}
 	public void setDate(String date) {
 		this.date = date;
