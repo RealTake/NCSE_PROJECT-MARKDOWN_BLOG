@@ -46,7 +46,7 @@ public class mainControl extends HttpServlet {
 
 	private void actionDo(HttpServletRequest req, HttpServletResponse res, String method){
 		res.setCharacterEncoding("EUC-KR");
-		
+	
 		String viewPage = null;
 		MCommand M = null;
 		BCommand B = null;

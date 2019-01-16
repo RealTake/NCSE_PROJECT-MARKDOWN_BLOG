@@ -9,6 +9,7 @@
 <body>
 <%
 	session.invalidate();
+	response.sendRedirect("/NCSE_BLOG");
 %>
 </body>
 </html>

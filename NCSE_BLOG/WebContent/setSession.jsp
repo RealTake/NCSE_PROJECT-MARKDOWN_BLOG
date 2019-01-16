@@ -18,7 +18,7 @@
 		if(id != null && authority == true)
 		{
 			session.setAttribute("user_id", id);
-			response.sendRedirect("Main.html");
+			response.sendRedirect("/NCSE_BLOG");
 		}
 		else
 		{

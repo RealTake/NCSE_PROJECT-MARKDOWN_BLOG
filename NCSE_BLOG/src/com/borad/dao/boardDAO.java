@@ -154,21 +154,14 @@ public class boardDAO
 		
 		List<BasicDBObject> board = new ArrayList<BasicDBObject>();
 		board.add(new BasicDBObject()
-		.append("board_header", "글쓰기 테스트중")
-		.append("board_contents", "입력이됬나요?")
-		.append("board_userID", "choi1234")
-		.append("board_date", "2019-01-01")
+		.append("board_header", dto.getTitle())
+		.append("board_contents", dto.getContent())
+		.append("board_userID", dto.getId())
+		.append("board_date", dto.getDate())
 		.append("board_like", 0)
 		.append("board_dislike", 0)
 		);
 		
-		
-//		BasicDBObject board = new BasicDBObject()
-//		.append("board_header", dto.getTitle())
-//		.append("board_contents", dto.getContent())
-//		.append("board_userID", dto.getId())
-//		.append("like", dto.getLike())
-//		.append("board_dislike", dto.getDisLike());
 		Document doc = new Document()
 		.append(cate, board);
 		
