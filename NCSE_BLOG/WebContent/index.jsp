@@ -106,12 +106,12 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="board.do">Dashboard</a></li>
-                            <li><a href="ui.html">UI Elements</a></li>
-                            <li><a href="table.html">Data Tables</a></li>
-                            <li><a href="forms.html">Forms</a></li>
-                             <li><a href="login.html">Login Page</a></li>
-                            <li><a href="blank.html">Blank Page</a></li>
+                            <li><a href="board.do?type=PJ_board">PJ_board</a></li>
+                            <li><a href="board.do?type=FR_board">FR_board</a></li>
+                            <li><a href="board.do?type=ITnews_board">ITnews_board</a></li>
+                            <li><a href="board.do?type=ST_board">ST_board</a></li>
+                            <li><a href="board.do?type=_board">미정_board</a></li>
+                            <li><a href="board.do?type=_board">미정_board</a></li>
 
                         </ul>
                     </div>
@@ -125,7 +125,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="page-head-line">Dashboard</h4>
+                    <h4 class="page-head-line">메인 화면</h4>
 
                 </div>
 
@@ -329,20 +329,14 @@
                      <div class="Compose-Message">               
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        Compose New Message 
+                        검색 
                     </div>
-                    <div class="panel-body">
-                        
-                        <label>Enter Recipient Name : </label>
-                        <input type="text" class="form-control" />
-                        <label>Enter Subject :  </label>
-                        <input type="text" class="form-control" />
-                        <label>Enter Message : </label>
-                        <textarea rows="9" class="form-control"></textarea>
-                        <hr />
-                        <a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-envelope"></span> Send Message </a>&nbsp;
-                      <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-tags"></span>  Save To Drafts </a>
-                    </div>
+                    <form method="GET" action="find.do" class="panel-body">
+                        <label>제목 : </label>
+                        <form method="GET" action="find.do">
+                        <input type="text" name="find" class="form-control" />
+                        <input type="submit" value="검색하기" class="btn btn-default btn-block"/>
+                      </form>
                     <div class="panel-footer text-muted">
                         <strong>Note : </strong>Please note that we track all messages so don't send any spams.
                     </div>

@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"%>
-
+<%
+	if(session.getAttribute("user_id") == null)
+	{
+		out.print("<script> alert('로그인해주세요'); </script>");
+		out.print("<script> location='index.jsp' </script>");
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -130,14 +136,23 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
  
 <form name="tx_editor_form" id="tx_editor_form" action="write.do" method="post" accept-charset="utf-8"> 
-	<table width="100%"> 
+	<table width="100%">
+		<tr>
+			<td>카테고리</td>
+			<td><select name="type">
+                    <option value="PJ_board">PJ_board</option>
+                    <option value="FR_board">FR_board</option>
+                    <option value="ST_board">ST_board</option>
+                    <option value="ITnews_board">ITnews_board</option>
+                </select> 
+            </td>
 		<tr> 
 			<td>제목</td> 
-			<td><input type="text" id="title" name="title"/></td> 
+			<td ><input type="text" id="title" name="title"/></td> 
 		</tr> 
 		<tr> 
 			<td>내용</td> 
-			<td id="editorTd">
+			<td id="editorTd" >
 				<%@ include file="/daumeditor/editor_template.html"%>
 			</td> 
 		</tr> 

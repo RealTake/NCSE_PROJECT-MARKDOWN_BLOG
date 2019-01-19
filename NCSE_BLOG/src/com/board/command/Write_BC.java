@@ -28,17 +28,18 @@ public class Write_BC implements BCommand{
 		}
 		
 		String title = req.getParameter("title");
-		String cate = req.getParameter("content");
+		String con = req.getParameter("content");
+		String type = req.getParameter("type");
 		String id = (String)(session.getAttribute("user_id"));
 		
 		System.out.println("°á°ú: " + id);
 		
 		dto.setTitle(title);
-		dto.setContent(cate);
+		dto.setContent(con);
 		dto.setId(id);
 		dto.setDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString());
 		
-		dao.write(dto, "PJ_board");
+		dao.write(dto, type);
 		
 		req.setAttribute("view", dto);
 	}

@@ -58,6 +58,7 @@ public class mainControl extends HttpServlet {
 		String com = uri.substring(contextPath.length());
 		System.out.println("요청 커맨드: " + com);
 		
+		//요청 커맨드로 부여
 		switch(com)
 		{
 		
@@ -109,8 +110,25 @@ public class mainControl extends HttpServlet {
 			viewPage = "viewPrivate.jsp";
 			break;
 			
+		case "/find.do" :
+			System.out.println(com + " 작동");
+			System.out.println("\n\n\n");
+			B = new Find_BC();
+			B.excute(req, res);
+			viewPage = "list.jsp";
+			break;
+			
+		case "/comment.do" :
+			System.out.println(com + " 작동");
+			System.out.println("\n\n\n");
+			B = new Comments_BC();
+			B.excute(req, res);
+			viewPage = "view.jsp";
+			break;
+			
 		}
 		
+		//최종적으로 보여줄 뷰단으로 이동
 		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
 		try {
 			dispatcher.forward(req, res);

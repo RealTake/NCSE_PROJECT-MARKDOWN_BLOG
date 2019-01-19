@@ -139,12 +139,12 @@
 						
 						<table width="1000" border="1">
 							<tr>
-								<td>${view.content }</td>
+								<td>${view.content}</td>
 							</tr>
 						</table>
                         
                         <br />
-                        <a href="board.do" target="_blank">목록</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="modify.do" target="_blank">수정</a>
+                        <a href="board.do?type=${view.type}" target="_blank">목록</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="modify.do" target="_blank">수정</a>
                   
                     </div>
                 </div>
