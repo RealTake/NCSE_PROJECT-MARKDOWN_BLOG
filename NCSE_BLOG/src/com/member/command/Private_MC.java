@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.dao.memberDAO;
-import com.member.dto.memberDTO;
 
 public class Private_MC implements MCommand 
 {

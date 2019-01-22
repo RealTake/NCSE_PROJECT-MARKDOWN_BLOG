@@ -1,5 +1,7 @@
 package com.board.dto;
 
+import java.util.ArrayList;
+
 public class boardDTO {
 	private int like;
 	private int disLike;
@@ -10,6 +12,8 @@ public class boardDTO {
 	private String id;
 	private String bId;
 	private String type;
+	
+	private ArrayList<commentDTO> comments;
 	
 	
 	public int getLike() {
@@ -36,7 +40,13 @@ public class boardDTO {
 	public String getType() {
 		return type;
 	}
+	public ArrayList<commentDTO> getComments() {
+		return comments;
+	}
 	
+	public void setComments(ArrayList<commentDTO> comments) {
+		this.comments = comments;
+	}
 	public void setLike(int like) {
 		this.like = like;
 	}

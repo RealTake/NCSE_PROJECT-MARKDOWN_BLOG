@@ -16,17 +16,17 @@
 <%
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");		
-	String login ="NewFile.html";
+	String login ="login";
 	
 	if(id == null || id.equals("") || pw == null || pw.equals(""))
 	{
 		out.print("<script> alert('아이디 또는 패스워드를 입력해주세요.'); </script>");
-		out.println("<script> location.href = '"+login+"'; </script>");
+		out.print("<script> location.href = '"+login+"'; </script>");
 	}
 	else if( ( id.length() > MAX || id.length() < MIN ) || ( pw.length() > MAX || pw.length() < MIN ))
 	{
-		out.println("<script> alert('로그인 정보를 3 ~ 14 안에 써주세요'); </script>");
-		out.println("<script> location.href = '"+login+"'; </script>");
+		out.print("<script> alert('로그인 정보를 3 ~ 14 안에 써주세요'); </script>");
+		out.print("<script> location.href = '"+login+"'; </script>");
 	}
 	else
 	{

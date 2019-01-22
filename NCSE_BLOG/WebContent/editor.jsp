@@ -101,13 +101,12 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a  href="board.do">Dashboard</a></li>
-                            <li><a href="ui.html">UI Elements</a></li>
-                            <li><a href="table.html">Data Tables</a></li>
-                            <li><a href="forms.html">Forms</a></li>
-                             <li><a href="login.html">Login Page</a></li>
-                            <li><a class="menu-top-active" href="blank.html">Blank Page</a></li>
-
+                            <li><a href="board.do?type=PJ_board">PJ_board</a></li>
+                            <li><a href="board.do?type=FR_board">FR_board</a></li>
+                            <li><a href="board.do?type=ITnews_board">ITnews_board</a></li>
+                            <li><a href="board.do?type=ST_board">ST_board</a></li>
+                            <li><a href="board.do?type=_board">미정_board</a></li>
+                            <li><a href="board.do?type=_board">미정_board</a></li>
                         </ul>
                     </div>
                 </div>

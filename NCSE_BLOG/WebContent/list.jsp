@@ -151,7 +151,7 @@
                                 </table>
                                 <%
                                   if(session.getAttribute("user_id") != null)
-                                  	out.print("<a href='editor.jsp'>글작성</a>");
+                                  	out.print("<a href='editor'>글작성</a>");
                                 %>  
 
 

@@ -2,6 +2,7 @@ package com.borad.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -10,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.board.dto.boardDTO;
+import com.board.dto.commentDTO;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -59,7 +61,6 @@ public class boardDAO
 		
 		catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return true;
 		}
@@ -75,24 +76,19 @@ public class boardDAO
 		{
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject)jsonParser.parse(temp);
-			Object array = jsonObject.get(cate);
-			if(array == null)
-				return null;
-			System.out.println(cate + " 배열: " + array);
 			String bid = jsonObject.get("_id").toString();
-			System.out.println(bid);
 			dto.setbId(bid.substring(9, bid.length() - 2));
 			
-			String tt = array.toString();
-			tt = tt.substring(1, tt.length()-1);
+			String array = jsonObject.get(cate).toString();
+			array = array.substring(1, array.length()-1);
 			
 			//배열로 구성되어있는 글들을 파싱하기위해 이중 파싱을함
-			jsonObject = (JSONObject)jsonParser.parse(tt);
+			jsonObject = (JSONObject)jsonParser.parse(array);
 			dto.setTitle(jsonObject.get("board_header").toString());
 			if(mode == true)
 				dto.setContent(jsonObject.get("board_contents").toString());
 			dto.setId(jsonObject.get("board_userID").toString());
-			dto.setDate(jsonObject.get("board_date").toString());
+			dto.setDate(jsonObject.get("board_date").toString().substring(0,10));
 			dto.setLike(new Integer(jsonObject.get("board_like").toString()));
 			dto.setDisLike(new Integer(jsonObject.get("board_dislike").toString()));
 			
@@ -113,14 +109,18 @@ public class boardDAO
 		{
 			ArrayList<boardDTO> dtos = new ArrayList<boardDTO>();
 			BasicDBObject cateQ = new BasicDBObject(category, new BasicDBObject("$exists", true)); //false: 를 제외한 나머지출력, ture: 를 포함하는 것들을 출력
-			MongoCursor<Document> it = documentMongoCollection.find(cateQ).iterator();
+			long start = System.currentTimeMillis();
+			MongoCursor<Document> it = documentMongoCollection.find(cateQ)
+					.projection(new BasicDBObject(category + ".board_contents", false))
+					.sort(new BasicDBObject(category + ".board_date", -1)).iterator();
 			
 			while(it.hasNext())
 			{
 				String temp = it.next().toJson();
 				dtos.add(parseList(temp, category, false));
 			}
-			
+			long end = System.currentTimeMillis();
+			System.out.println(end-start);
 			return dtos;
 			
 		}
@@ -129,32 +129,36 @@ public class boardDAO
 	//글보기(추후에 json 배열 파서를 따로 함수로 만들지 고민 위의 list 함수와함께)
 	public boardDTO viewContent(String bid)
 	{
-		boardDTO dto = new boardDTO();
+		ArrayList<commentDTO> comments = new ArrayList<commentDTO>();
 		BasicDBObject query = new BasicDBObject("_id", new ObjectId(bid));
-		MongoCursor<Document> it = documentMongoCollection.find(query).iterator();
+		Document it = documentMongoCollection.find(query).first();
+		String[] key= it.keySet().toArray(new String[2]);
 		
-			String temp = it.next().toJson();
-			String[] type ={"PJ_board", "FR_board", "ST_board", "ITnews_board"};
-			
-			for(int i = 0; i < type.length; i++)
+		boardDTO dto = parseList(it.toJson(), key[1], true);
+		dto.setType(key[1]);
+		
+		//댓글 파싱
+		List<Document> commentss = (List<Document>) it.get("comments");
+		if(commentss != null)
+		{
+			for (Document comment : commentss) 
 			{
-				dto = parseList(temp, type[i], true);
+				commentDTO dto_c = new commentDTO();
 				
-				if(dto == null)
-					continue;
-				else
-				{
-					dto.setType(type[i]);
-					break;
-				}
+				dto_c.setName(comment.getString("name"));
+				dto_c.setComment(comment.getString("contents"));
 				
+				comments.add(dto_c);
 			}
-			return dto;
+			
+			dto.setComments(comments);
+		}
 		
+		return dto;
 	}
 	
 	//글쓰기
-	public void write(boardDTO dto, String cate)
+	public void write(boardDTO dto)
 	{
 		
 		List<BasicDBObject> board = new ArrayList<BasicDBObject>();
@@ -166,7 +170,7 @@ public class boardDAO
 		.append("board_like", 0)
 		.append("board_dislike", 0));
 		
-		Document doc = new Document().append(cate, board);
+		Document doc = new Document().append(dto.getType(), board).append("comments", new ArrayList());
 		
 		documentMongoCollection.insertOne(doc);
 	}
@@ -174,27 +178,32 @@ public class boardDAO
 	//검색목록 가져오기
 	public ArrayList<boardDTO> find(String searched)
 	{
+		//String[] type = {"PJ_board","FR_board","ST_board","ITnew_board"};
 		ArrayList<boardDTO> dtos = new ArrayList<boardDTO>();
-		BasicDBObject search = new BasicDBObject("$text",new BasicDBObject("$search",searched));
-		MongoCursor<Document> it = documentMongoCollection.find(search).iterator();
+		BasicDBObject search = new BasicDBObject("PJ_board.board_header", Pattern.compile(searched, Pattern.CASE_INSENSITIVE));
+		System.out.println(search);
+		MongoCursor<Document> it = documentMongoCollection.find(search)
+				.projection(new BasicDBObject("PJ_board" + ".board_contents", false))
+				.sort(new BasicDBObject("PJ_board.board_date", -1)).iterator();
 		
 		while(it.hasNext())
 		{
 			boardDTO dto = new boardDTO();
 			String temp = it.next().toJson();
+				System.out.println(temp);
 				
-				String[] type ={"PJ_board", "FR_board", "ST_board", "ITnews_board"};
-				
-				for(int i = 0; i < type.length; i++)
-				{
-					dto = parseList(temp, type[i], false);
-					if(dto == null)
-						continue;
+					dto = parseList(temp, "PJ_board", false);
 					dtos.add(dto);
-				}
 		
 		}
 		return dtos;
 	}
+	
+	public void setComments(String bid, String id, String comment)
+	{
+		documentMongoCollection.updateOne(new BasicDBObject("_id", new ObjectId(bid)), 
+				  new BasicDBObject("$push",new BasicDBObject("comments", new BasicDBObject("name", id).append("contents", comment))));
+	}
+	
 }
 	

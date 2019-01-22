@@ -1,6 +1,7 @@
 package com.main.control;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,9 +46,9 @@ public class mainControl extends HttpServlet {
 	}
 
 	private void actionDo(HttpServletRequest req, HttpServletResponse res, String method){
-		res.setCharacterEncoding("EUC-KR");
 	
 		String viewPage = null;
+		boolean mode = true;
 		MCommand M = null;
 		BCommand B = null;
 		
@@ -58,6 +59,13 @@ public class mainControl extends HttpServlet {
 		String com = uri.substring(contextPath.length());
 		System.out.println("요청 커맨드: " + com);
 		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		//요청 커맨드로 부여
 		switch(com)
 		{
@@ -67,7 +75,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			M = new Login_MC();
 			M.excute(req, res);
-			viewPage = "setSession.jsp";
+			viewPage = ".";
 			break;
 			
 		case "/join.do" :
@@ -75,7 +83,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			M = new Join_MC();
 			M.excute(req, res);
-			viewPage = "NewFile.html";
+			viewPage = "login";
 			break;
 			
 		case "/board.do" :
@@ -83,7 +91,8 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new List_BC();
 			B.excute(req, res);
-			viewPage = "list.jsp";
+			mode = false;
+			viewPage = "list";
 			break;
 			
 		case "/content_view.do" :
@@ -91,7 +100,8 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new View_BC();
 			B.excute(req, res);
-			viewPage = "view.jsp";
+			mode = false;
+			viewPage = "view";
 			break;
 		
 		case "/write.do" :
@@ -99,7 +109,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new Write_BC();
 			B.excute(req, res);
-			viewPage = "view.jsp";
+			viewPage = "board.do?type=" + req.getAttribute("type");
 			break;
 			
 		case "/private.do" :
@@ -107,7 +117,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			M = new Private_MC();
 			M.excute(req, res);
-			viewPage = "viewPrivate.jsp";
+			viewPage = "viewPrivate";
 			break;
 			
 		case "/find.do" :
@@ -115,7 +125,8 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new Find_BC();
 			B.excute(req, res);
-			viewPage = "list.jsp";
+			mode = false;
+			viewPage = "list";
 			break;
 			
 		case "/comment.do" :
@@ -123,23 +134,53 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new Comments_BC();
 			B.excute(req, res);
-			viewPage = "view.jsp";
+			viewPage = "content_view.do?bId="+req.getParameter("bid");
+			break;
+			
+		case "/modify.do" :
+			System.out.println(com + " 작동");
+			System.out.println("\n\n\n");
+			B = new Comments_BC();
+			B.excute(req, res);
+			viewPage = "content_view.do?bId="+req.getParameter("bid");
+			break;
+			
+		case "/delet.do" :
+			System.out.println(com + " 작동");
+			System.out.println("\n\n\n");
+			B = new Comments_BC();
+			B.excute(req, res);
+			viewPage = "content_view.do?bId="+req.getParameter("bid");
 			break;
 			
 		}
 		
-		//최종적으로 보여줄 뷰단으로 이동
-		RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
-		try {
-			dispatcher.forward(req, res);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(mode)
+		{
+			try {
+				res.sendRedirect(viewPage);
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
 		}
-		
+		else
+		{
+			//최종적으로 보여줄 뷰단으로 이동
+			RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
+			try 
+			{
+				dispatcher.forward(req, res);
+			} 
+			catch (ServletException e) 
+			{
+				e.printStackTrace();
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }

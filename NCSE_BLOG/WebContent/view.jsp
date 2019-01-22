@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +11,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>작성글</title>
+    <title></title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME ICONS  -->
@@ -94,12 +95,12 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a  href="board.do">Dashboard</a></li>
-                            <li><a href="ui.html">UI Elements</a></li>
-                            <li><a href="table.html">Data Tables</a></li>
-                            <li><a href="forms.html">Forms</a></li>
-                             <li><a href="login.html">Login Page</a></li>
-                            <li><a class="menu-top-active" href="blank.html">Blank Page</a></li>
+                            <li><a href="board.do?type=PJ_board">PJ_board</a></li>
+                            <li><a href="board.do?type=FR_board">FR_board</a></li>
+                            <li><a href="board.do?type=ITnews_board">ITnews_board</a></li>
+                            <li><a href="board.do?type=ST_board">ST_board</a></li>
+                            <li><a href="board.do?type=_board">미정_board</a></li>
+                            <li><a href="board.do?type=_board">미정_board</a></li>
 
                         </ul>
                     </div>
@@ -144,9 +145,41 @@
 						</table>
                         
                         <br />
-                        <a href="board.do?type=${view.type}" target="_blank">목록</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="modify.do" target="_blank">수정</a>
+                        <input type="button" value="목록" onclick="location.href='board.do?type=${view.type}'" target="_blank">&nbsp&nbsp&nbsp&nbsp&nbsp<a href="modify.do" target="_blank">수정</a>
                   
                     </div>
+                    
+                    <div class="alert alert-warning">
+                    	<c:forEach items="${view.comments}" var="dto">
+	                    <p><table border="1">
+							<tr>
+								<td width="200px">아이디: ${dto.name}</td>
+							</tr>
+						</table><p>
+						
+						<p><table width="1000" border="1">
+							<tr>
+								<td width="50px">댓글</td>
+								<td>${dto.comment }</td>
+							</tr>
+			            </table></p>
+			            	</c:forEach>
+                  	</div>
+                  	
+                    <br/>
+                    
+                    	<form method="post" action="comment.do" class="alert alert-warning">
+                    		<input type="hidden" name="bid" value="${view.bId }"/>
+                    		<input type="hidden" name="type" value="${view.type }"/>
+		                    <table width="1000" border="1">
+								<tr>
+									<td>댓글</td>
+									<td><input name="comment" rows="8" cols="50" style="margin: 20px; height: 100px; width: 900px;"></td>
+								</tr>
+		                    </table>
+		                    <input type="submit" value="댓글">
+	                    </form>
+                    
                 </div>
 
             </div>

@@ -1,6 +1,5 @@
 package com.board.command;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,15 +17,6 @@ public class Write_BC implements BCommand{
 		boardDTO dto = new boardDTO();
 		HttpSession session = req.getSession();
 		
-		try {
-			req.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) 
-		
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		String title = req.getParameter("title");
 		String con = req.getParameter("content");
 		String type = req.getParameter("type");
@@ -34,13 +24,14 @@ public class Write_BC implements BCommand{
 		
 		System.out.println("°á°ú: " + id);
 		
+		dto.setType(type);
 		dto.setTitle(title);
 		dto.setContent(con);
 		dto.setId(id);
-		dto.setDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString());
+		dto.setDate(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()).toString());
 		
-		dao.write(dto, type);
-		
+		dao.write(dto);
+		req.setAttribute("type", type);
 		req.setAttribute("view", dto);
 	}
 }

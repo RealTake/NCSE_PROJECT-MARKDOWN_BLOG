@@ -40,7 +40,7 @@
             	{
             		%>
 	                <div class="col-md-12">
-	                    <strong><a href='NewFile.html'>[ 로그인 ]</a></strong>
+	                    <strong><a href='login.jsp'>[ 로그인 ]</a></strong>
 	                    &nbsp;&nbsp;
 	                </div>
 	                <%
@@ -331,9 +331,8 @@
                     <div class="panel-heading">
                         검색 
                     </div>
-                    <form method="GET" action="find.do" class="panel-body">
+                    <form method="get" action="find.do" class="panel-body">
                         <label>제목 : </label>
-                        <form method="GET" action="find.do">
                         <input type="text" name="find" class="form-control" />
                         <input type="submit" value="검색하기" class="btn btn-default btn-block"/>
                       </form>
