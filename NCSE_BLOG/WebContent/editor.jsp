@@ -139,7 +139,7 @@
             </td>
 		<tr> 
 			<td><p>제목</p></td>
-			<td><p><input size="100%" type="text" id="title" name="title"/></p></td>
+			<td><p><input size="100%" type="text" name="title"/></p></td>
 		</tr> 
 		<tr> 
 			<td>내용</td> 

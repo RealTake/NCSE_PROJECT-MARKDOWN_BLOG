@@ -21,7 +21,8 @@ public class Write_BC implements BCommand{
 		String con = req.getParameter("content");
 		String type = req.getParameter("type");
 		String id;
-		if(session.getAttribute("user_id") != null)
+		System.out.println("Á¦¸ñ: " + title.length());
+		if((session.getAttribute("user_id") != null) && (title != null && !title.equals("")))
 		{
 			id = (String)(session.getAttribute("user_id"));
 			

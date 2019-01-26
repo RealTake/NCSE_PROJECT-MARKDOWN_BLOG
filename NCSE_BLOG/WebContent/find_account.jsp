@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,8 +16,6 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String mode = request.getParameter("mode");
-	
-	out.print(name+" "+email);
 	
 	findAccount f = new findAccount(name, email, id, mode);// 맨 마지막 매개변수는 꼭 id,pwd일것
 	out.print(f.inpuiryAccount());

@@ -50,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/NCSE_BLOG">
+                <a class="navbar-brand" href="/">
 
                     <img src="assets/img/logo.png" />
                 </a>
@@ -83,7 +83,7 @@
                             <input type="password" name="pw" />
                             <hr/>
                             <input type="submit" value="로그인">
-                            <a href="find_account">계정찾기</a>
+                            <a href="account_find.html">계정찾기</a>
                             <a href="join.jsp">회원가입</a>
                         </form>
                 </div>
