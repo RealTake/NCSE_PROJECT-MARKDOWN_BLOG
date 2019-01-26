@@ -1,6 +1,6 @@
 <%@page import="com.member.dao.findAccount"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +9,7 @@
 </head>
 <body>
 <%
-	out.print("hi");
-	request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("UTF-8");
 	
 	String name = request.getParameter("name");
 	String email = request.getParameter("email");
@@ -20,7 +19,8 @@
 	
 	out.print(name+" "+email);
 	
-	findAccount f = new findAccount(name, email, id, pw, mode);// ¸Ç ¸¶Áö¸· ¸Å°³º¯¼ö´Â ²À id,pwdÀÏ°Í
+	findAccount f = new findAccount(name, email, id, mode);// ë§¨ ë§ˆì§€ë§‰ ë§¤ê°œë³€ìˆ˜ëŠ” ê¼­ id,pwdì¼ê²ƒ
+	out.print(f.inpuiryAccount());
 %>
 </body>
 </html>

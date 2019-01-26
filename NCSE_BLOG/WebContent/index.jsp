@@ -32,9 +32,9 @@
             	String ses = (String)(session.getAttribute("user_id"));
             	if(ses != null)
             	{
-            		out.print("환영합니다 <strong><a href='checkPrivate.jsp'>" + ses + "님</a></strong>");
+            		out.print("환영합니다 <strong><a href='checkPrivate'>" + ses + "님</a></strong>");
             		out.print("&nbsp&nbsp&nbsp&nbsp&nbsp");
-            		out.print("<input type=\"button\" value=\"로그아웃\" onclick=\"location.href='http://localhost:8181/NCSE_BLOG/logOut.jsp'\">");
+            		out.print("<a href='logOut'>로그아웃</a>");
             	}
             	else
             	{
@@ -331,7 +331,7 @@
                         검색 
                     </div>
                     <form method="get" action="find.do" class="panel-body">
-                        <label>제목 : </label>
+                        <label>제목 + 내용 : </label>
                         <input type="text" name="find" class="form-control" />
                         <input type="submit" value="검색하기" class="btn btn-default btn-block"/>
                       </form>

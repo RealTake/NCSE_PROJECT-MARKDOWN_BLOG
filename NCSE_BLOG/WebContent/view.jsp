@@ -168,17 +168,21 @@
                   	</div>
                   	
                     <br/>
-                    
-                    	<form method="post" action="comment.do" class="alert alert-warning">
-                    		<input type="hidden" name="bid" value="${view.bId }"/>
-                    		<input type="hidden" name="type" value="${view.type }"/>
-		                    <table class="table table-striped table-bordered table-hover" width="1000" border="1">
-								<tr>
-									<td><span class="glyphicon glyphicon-comment  text-warning"></span></td>
-									<td><input name="comment" rows="8" cols="50" style="margin: 20px; height: 100px; width: 900px;"><input type="submit" value="댓글" style="margin: 10px; height: 90px; width: 85px;"></td>
-								</tr>
-		                    </table>
-	                    </form>
+                    <% if(session.getAttribute("user_id") != null)
+                    	{
+                    	%>
+	                    	<form method="post" action="comment.do" class="alert alert-warning">
+	                    		<input type="hidden" name="bid" value="${view.bId }"/>
+	                    		<input type="hidden" name="type" value="${view.type }"/>
+			                    <table class="table table-striped table-bordered table-hover" width="1000" border="1">
+									<tr>
+										<td><span class="glyphicon glyphicon-comment  text-warning"></span></td>
+										<td><input name="comment" rows="8" cols="50" style="margin: 20px; height: 100px; width: 900px;"><input type="submit" value="댓글" style="margin: 10px; height: 90px; width: 85px;"></td>
+									</tr>
+			                    </table>
+		                    </form>
+	                    <%} 
+	                %>
                     
                 </div>
 

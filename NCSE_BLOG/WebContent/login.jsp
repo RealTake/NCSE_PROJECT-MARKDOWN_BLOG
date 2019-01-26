@@ -83,7 +83,8 @@
                             <input type="password" name="pw" />
                             <hr/>
                             <input type="submit" value="로그인">
-                            <a href="checkPrivate.jsp">개인정보</a>
+                            <a href="find_account">계정찾기</a>
+                            <a href="join.jsp">회원가입</a>
                         </form>
                 </div>
                 <div class="col-md-6">

@@ -115,5 +115,8 @@
 		<%
 	}
 	else if(check.equals("false"))
+	{
 		out.print("<script> alert('이미 존재 하는 아이디입니다'); </script>");
+		out.print("<script> location.href='join' </script>");
+	}
 %>

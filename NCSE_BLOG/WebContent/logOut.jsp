@@ -9,7 +9,7 @@
 <body>
 <%
 	session.invalidate();
-	response.sendRedirect("/NCSE_BLOG");
+	response.sendRedirect("/");
 %>
 </body>
 </html>

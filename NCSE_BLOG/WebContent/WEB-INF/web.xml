@@ -69,6 +69,42 @@
         <url-pattern>/loginCheck</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>logOut-jsp</servlet-name>
+        <jsp-file>/logOut.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logOut-jsp</servlet-name>
+        <url-pattern>/logOut</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>join-jsp</servlet-name>
+        <jsp-file>/join.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>join-jsp</servlet-name>
+        <url-pattern>/join</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>checkPrivate-jsp</servlet-name>
+        <jsp-file>/checkPrivate.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>checkPrivate-jsp</servlet-name>
+        <url-pattern>/checkPrivate</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>find_account-jsp</servlet-name>
+        <jsp-file>/find_account.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>find_account-jsp</servlet-name>
+        <url-pattern>/find_account</url-pattern>
+    </servlet-mapping>
+    
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

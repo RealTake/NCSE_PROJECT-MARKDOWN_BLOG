@@ -194,7 +194,7 @@ public class boardDAO
 			String temp = it.next().toJson();
 				System.out.println(temp);
 				
-					dto = parseList(temp, "PJ_board", false);
+					dto = parseList(temp, type, false);
 					dtos.add(dto);
 		
 		}
