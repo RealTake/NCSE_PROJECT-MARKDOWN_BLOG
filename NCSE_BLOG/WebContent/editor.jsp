@@ -4,7 +4,7 @@
 	if(session.getAttribute("user_id") == null)
 	{
 		out.print("<script> alert('로그인해주세요'); </script>");
-		out.print("<script> location='index.jsp' </script>");
+		out.print("<script> location='/' </script>");
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,7 +53,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/NCSE_BLOG">
+                <a class="navbar-brand" href="/">
 
                     <img src="assets/img/logo.png" />
                 </a>
@@ -116,22 +116,14 @@
     </section>
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="page-head-line">${view.title}</h4>
-
-                </div>
-
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="alert alert-warning">
                     
 						
                         
-                        <link rel="stylesheet" href="/NCSE_BLOG/daumeditor/css/editor.css" type="text/css" charset="utf-8"/> 
-<script src="/NCSE_BLOG/daumeditor/js/editor_loader.js?environment=development" type="text/javascript" charset="utf-8"></script> 
+<link rel="stylesheet" href="/daumeditor/css/editor.css" type="text/css" charset="utf-8"/> 
+<script src="/daumeditor/js/editor_loader.js?environment=development" type="text/javascript" charset="utf-8"></script> 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
  
 <form name="tx_editor_form" id="tx_editor_form" action="write.do" method="post" accept-charset="utf-8"> 
@@ -146,8 +138,8 @@
                 </select> 
             </td>
 		<tr> 
-			<td>제목</td> 
-			<td ><input type="text" id="title" name="title"/></td> 
+			<td><p>제목</p></td>
+			<td><p><input size="100%" type="text" id="title" name="title"/></p></td>
 		</tr> 
 		<tr> 
 			<td>내용</td> 
@@ -173,8 +165,8 @@ function setConfig(){
 					initializedId: "", /* 대부분의 경우에 빈문자열 */
 					wrapper: "tx_trex_container", /* 에디터를 둘러싸고 있는 레이어 이름(에디터 컨테이너) */
 					form: 'tx_editor_form'+"", /* 등록하기 위한 Form 이름 */
-					txIconPath: "/NCSE_BLOG/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
-					txDecoPath: "/NCSE_BLOG/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
+					txIconPath: "/daumeditor/images/icon/editor/", /*에디터에 사용되는 이미지 디렉터리, 필요에 따라 수정한다. */
+					txDecoPath: "/daumeditor/images/deco/contents/", /*본문에 사용되는 이미지 디렉터리, 서비스에서 사용할 때는 완성된 컨텐츠로 배포되기 위해 절대경로로 수정한다. */
 					canvas: {
 						styles: {
 							color: "#123456", /* 기본 글자색 */
@@ -207,7 +199,7 @@ function setConfig(){
 	$(function(){
 		$.ajax({
 	        type:"POST", 
-	        url: "/NCSE_BLOG/daumeditor/editor_template.html",
+	        url: "/daumeditor/editor_template.html",
 	        success: function(data){
 	        	$("#editorTd").html(data);
 	        	setConfig();

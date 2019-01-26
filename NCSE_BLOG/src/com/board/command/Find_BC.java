@@ -1,12 +1,10 @@
 package com.board.command;
 
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.board.dto.boardDTO;
-import com.borad.dao.boardDAO;
+import com.board.dao.boardDAO;
 
 public class Find_BC implements BCommand{
 
@@ -14,9 +12,11 @@ public class Find_BC implements BCommand{
 		boardDAO dao = boardDAO.getInstance();
 		String searched = req.getParameter("find");
 		System.out.println(searched);
-		ArrayList<boardDTO> dtos = dao.find(searched);
 		
-		req.setAttribute("list", dtos);
+		req.setAttribute("PJ", dao.find(searched,"PJ_board"));
+		req.setAttribute("ST", dao.find(searched,"ST_board"));
+		req.setAttribute("FR", dao.find(searched,"FR_board"));
+		req.setAttribute("ITnews", dao.find(searched,"ITnews_board"));
 		
 	}
 }

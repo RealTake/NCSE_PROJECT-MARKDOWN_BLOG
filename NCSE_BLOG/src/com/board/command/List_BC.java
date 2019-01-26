@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.board.dao.boardDAO;
 import com.board.dto.boardDTO;
-import com.borad.dao.boardDAO;
 
 public class List_BC implements BCommand{
 
@@ -27,6 +27,8 @@ public class List_BC implements BCommand{
 //		System.out.println("³¯Â¥: " + dto.getDate());
 //		System.out.println("========================================\n");
 //		}
+		
+		req.setAttribute("type", type);
 		req.setAttribute("list", dtos);
 	}
 }

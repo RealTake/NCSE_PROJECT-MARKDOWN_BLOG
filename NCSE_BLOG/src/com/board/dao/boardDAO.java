@@ -1,4 +1,4 @@
-package com.borad.dao;
+package com.board.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,11 +176,13 @@ public class boardDAO
 	}
 	
 	//검색목록 가져오기
-	public ArrayList<boardDTO> find(String searched)
+	public ArrayList<boardDTO> find(String searched, String type)
 	{
-		//String[] type = {"PJ_board","FR_board","ST_board","ITnew_board"};
 		ArrayList<boardDTO> dtos = new ArrayList<boardDTO>();
-		BasicDBObject search = new BasicDBObject("PJ_board.board_header", Pattern.compile(searched, Pattern.CASE_INSENSITIVE));
+		ArrayList<BasicDBObject> Fquery = new ArrayList<BasicDBObject>();
+		Fquery.add(new BasicDBObject(type + ".board_contents", Pattern.compile(searched, Pattern.CASE_INSENSITIVE)));
+		Fquery.add(new BasicDBObject(type + ".board_header", Pattern.compile(searched, Pattern.CASE_INSENSITIVE)));
+		BasicDBObject search = new BasicDBObject(new BasicDBObject("$or", Fquery));
 		System.out.println(search);
 		MongoCursor<Document> it = documentMongoCollection.find(search)
 				.projection(new BasicDBObject("PJ_board" + ".board_contents", false))
@@ -203,6 +205,38 @@ public class boardDAO
 	{
 		documentMongoCollection.updateOne(new BasicDBObject("_id", new ObjectId(bid)), 
 				  new BasicDBObject("$push",new BasicDBObject("comments", new BasicDBObject("name", id).append("contents", comment))));
+	}
+	
+	public void delete(boardDTO dto, String id)
+	{
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(dto.getbId()));
+		Document it = documentMongoCollection.find(query).first();
+		
+		List<Document> temp = (List<Document>) it.get(dto.getType());
+		if(temp != null)
+		{
+			
+			if(temp.get(0).getString("board_userID").equals(id))
+				documentMongoCollection.deleteOne(new BasicDBObject("_id", new ObjectId(dto.getbId())));
+		}
+	}
+	
+	public void modify(boardDTO dto)
+	{
+		BasicDBObject query = new BasicDBObject("_id", new ObjectId(dto.getbId()));
+		Document it = documentMongoCollection.find(query).first();
+		
+		List<Document> temp = (List<Document>) it.get(dto.getType());
+		if(temp != null)
+		{
+			
+			if(temp.get(0).getString("board_userID").equals(dto.getId()))
+			{
+				documentMongoCollection.updateOne(new BasicDBObject("_id", new ObjectId(dto.getbId())), 
+				new BasicDBObject("$set", new BasicDBObject(dto.getType() + ".0.board_header", dto.getTitle())
+				.append(dto.getType() + ".0.board_contents", dto.getContent())));
+			}
+		}
 	}
 	
 }

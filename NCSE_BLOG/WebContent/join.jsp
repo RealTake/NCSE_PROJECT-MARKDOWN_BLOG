@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%
+	String check = request.getParameter("check");
+	if(check == null)
+	{
+		%>
+			
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,3 +112,8 @@
     </div> 
 </body>
 </html>
+		<%
+	}
+	else if(check.equals("false"))
+		out.print("<script> alert('이미 존재 하는 아이디입니다'); </script>");
+%>

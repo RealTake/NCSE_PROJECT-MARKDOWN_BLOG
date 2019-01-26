@@ -2,6 +2,22 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>NCSE_BLOG</display-name>
   <servlet>
+        <servlet-name>list_F-jsp</servlet-name>
+        <jsp-file>/list_F.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>list_F-jsp</servlet-name>
+        <url-pattern>/list_F</url-pattern>
+    </servlet-mapping>
+  <servlet>
+        <servlet-name>modifyCheck-jsp</servlet-name>
+        <jsp-file>/modifyCheck.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modifyCheck-jsp</servlet-name>
+        <url-pattern>/modifyCheck</url-pattern>
+    </servlet-mapping>
+  <servlet>
         <servlet-name>login-jsp</servlet-name>
         <jsp-file>/login.jsp</jsp-file>
     </servlet>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -32,15 +32,15 @@
             	String ses = (String)(session.getAttribute("user_id"));
             	if(ses != null)
             	{
-            		out.print("»Øøµ«’¥œ¥Ÿ <strong><a href='checkPrivate.jsp'>" + ses + "¥‘</a></strong>");
+            		out.print("ÌôòÏòÅÌï©ÎãàÎã§ <strong><a href='checkPrivate.jsp'>" + ses + "Îãò</a></strong>");
             		out.print("&nbsp&nbsp&nbsp&nbsp&nbsp");
-            		out.print("<input type=\"button\" value=\"∑Œ±◊æ∆øÙ\" onclick=\"location.href='http://localhost:8181/NCSE_BLOG/logOut.jsp'\">");
+            		out.print("<input type=\"button\" value=\"Î°úÍ∑∏ÏïÑÏõÉ\" onclick=\"location.href='http://localhost:8181/NCSE_BLOG/logOut.jsp'\">");
             	}
             	else
             	{
             		%>
 	                <div class="col-md-12">
-	                    <strong><a href='login.jsp'>[ ∑Œ±◊¿Œ ]</a></strong>
+	                    <strong><a href='login'>[ Î°úÍ∑∏Ïù∏ ]</a></strong>
 	                    &nbsp;&nbsp;
 	                </div>
 	                <%
@@ -58,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/NCSE_BLOG">
+                <a class="navbar-brand" href="/">
 
                     <img src="assets/img/logo.png" />
                 </a>
@@ -110,8 +110,8 @@
                             <li><a href="board.do?type=FR_board">FR_board</a></li>
                             <li><a href="board.do?type=ITnews_board">ITnews_board</a></li>
                             <li><a href="board.do?type=ST_board">ST_board</a></li>
-                            <li><a href="board.do?type=_board">πÃ¡§_board</a></li>
-                            <li><a href="board.do?type=_board">πÃ¡§_board</a></li>
+                            <li><a href="board.do?type=_board">ÎØ∏Ï†ï_board</a></li>
+                            <li><a href="board.do?type=_board">ÎØ∏Ï†ï_board</a></li>
 
                         </ul>
                     </div>
@@ -125,7 +125,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="page-head-line">∏ﬁ¿Œ »≠∏È</h4>
+                    <h4 class="page-head-line">Î©îÏù∏ ÌôîÎ©¥</h4>
 
                 </div>
 
@@ -237,8 +237,7 @@
                                           <span class="label label-success" >Let's have it </span>
                                             </a>
                                     </li>
-                                   </a>
-                                    </li>
+      
                                 </ul>
                             </div>
                             <div class="panel-footer">
@@ -329,12 +328,12 @@
                      <div class="Compose-Message">               
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        ∞Àªˆ 
+                        Í≤ÄÏÉâ 
                     </div>
                     <form method="get" action="find.do" class="panel-body">
-                        <label>¡¶∏Ò : </label>
+                        <label>Ï†úÎ™© : </label>
                         <input type="text" name="find" class="form-control" />
-                        <input type="submit" value="∞Àªˆ«œ±‚" class="btn btn-default btn-block"/>
+                        <input type="submit" value="Í≤ÄÏÉâÌïòÍ∏∞" class="btn btn-default btn-block"/>
                       </form>
                     <div class="panel-footer text-muted">
                         <strong>Note : </strong>Please note that we track all messages so don't send any spams.

@@ -1,7 +1,9 @@
 package com.main.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,19 +54,19 @@ public class mainControl extends HttpServlet {
 		MCommand M = null;
 		BCommand B = null;
 		
-		String uri = req.getRequestURI();
-		System.out.println("요청uri: " + uri);
-		String contextPath = req.getContextPath();
-		System.out.println("컨텍스트 패스: " + contextPath);
-		String com = uri.substring(contextPath.length());
-		System.out.println("요청 커맨드: " + com);
-		
 		try {
 			req.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		String uri = req.getRequestURI();
+		System.out.println("요청uri: " + uri);
+		String contextPath = req.getContextPath();
+		System.out.println("컨텍스트 패스: " + contextPath);
+		String com = uri.substring(contextPath.length());
+		System.out.println("요청 커맨드: " + com);
 		
 		//요청 커맨드로 부여
 		switch(com)
@@ -83,7 +85,12 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			M = new Join_MC();
 			M.excute(req, res);
-			viewPage = "login";
+			if((Boolean)req.getAttribute("check") == false)
+			{
+				viewPage = "join.jsp?check=false";
+			}
+			else
+				viewPage = "login";
 			break;
 			
 		case "/board.do" :
@@ -126,7 +133,7 @@ public class mainControl extends HttpServlet {
 			B = new Find_BC();
 			B.excute(req, res);
 			mode = false;
-			viewPage = "list";
+			viewPage = "list_F";
 			break;
 			
 		case "/comment.do" :
@@ -134,23 +141,23 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new Comments_BC();
 			B.excute(req, res);
-			viewPage = "content_view.do?bId="+req.getParameter("bid");
+			viewPage = "content_view.do?bid="+req.getParameter("bid");
 			break;
 			
 		case "/modify.do" :
 			System.out.println(com + " 작동");
 			System.out.println("\n\n\n");
-			B = new Comments_BC();
+			B = new Modify_BC();
 			B.excute(req, res);
-			viewPage = "content_view.do?bId="+req.getParameter("bid");
+			viewPage = "content_view.do?bid="+req.getParameter("bid");
 			break;
 			
-		case "/delet.do" :
+		case "/delete.do" :
 			System.out.println(com + " 작동");
 			System.out.println("\n\n\n");
-			B = new Comments_BC();
+			B = new Delete_BC();
 			B.excute(req, res);
-			viewPage = "content_view.do?bId="+req.getParameter("bid");
+			viewPage = "board.do?type=" + req.getParameter("type");
 			break;
 			
 		}

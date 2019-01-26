@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/NCSE_BLOG">
+                <a class="navbar-brand" href="/">
 
                     <img src="assets/img/logo.png" />
                 </a>
@@ -123,7 +123,7 @@
                 <div class="col-md-12">
                     <div class="alert alert-warning">
                     
-						<table width="1000" border="1">
+						<table width="1000" class="table table-striped table-bordered table-hover"border="1">
 								<tr>
 									<td>아이디</td>
 									<td>${view.id}</td>
@@ -138,31 +138,32 @@
 
 						</br>
 						
-						<table width="1000" border="1">
+						<table class="table table-striped table-bordered table-hover"	 width="1000" border="1">
 							<tr>
 								<td>${view.content}</td>
 							</tr>
 						</table>
                         
                         <br />
-                        <input type="button" value="목록" onclick="location.href='board.do?type=${view.type}'" target="_blank">&nbsp&nbsp&nbsp&nbsp&nbsp<a href="modify.do" target="_blank">수정</a>
+                        <a href="board.do?type=${view.type}" class="glyphicon glyphicon-align-left text-success" target="_self">목록</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <a href="modifyCheck?bid=${view.bId}&type=${view.type}" class="glyphicon glyphicon-edit  text-danger" target="_self">수정</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <a href="delete.do?bid=${view.bId}&type=${view.type}" class="glyphicon glyphicon-info-sign text-danger" target="_self">삭제</a>
+                        
                   
                     </div>
                     
                     <div class="alert alert-warning">
                     	<c:forEach items="${view.comments}" var="dto">
-	                    <p><table border="1">
+						<table class="table table-striped table-bordered table-hover" width="1000" border="1">
 							<tr>
 								<td width="200px">아이디: ${dto.name}</td>
+								
 							</tr>
-						</table><p>
-						
-						<p><table width="1000" border="1">
 							<tr>
 								<td width="50px">댓글</td>
 								<td>${dto.comment }</td>
 							</tr>
-			            </table></p>
+			            </table>
 			            	</c:forEach>
                   	</div>
                   	
@@ -171,13 +172,12 @@
                     	<form method="post" action="comment.do" class="alert alert-warning">
                     		<input type="hidden" name="bid" value="${view.bId }"/>
                     		<input type="hidden" name="type" value="${view.type }"/>
-		                    <table width="1000" border="1">
+		                    <table class="table table-striped table-bordered table-hover" width="1000" border="1">
 								<tr>
-									<td>댓글</td>
-									<td><input name="comment" rows="8" cols="50" style="margin: 20px; height: 100px; width: 900px;"></td>
+									<td><span class="glyphicon glyphicon-comment  text-warning"></span></td>
+									<td><input name="comment" rows="8" cols="50" style="margin: 20px; height: 100px; width: 900px;"><input type="submit" value="댓글" style="margin: 10px; height: 90px; width: 85px;"></td>
 								</tr>
 		                    </table>
-		                    <input type="submit" value="댓글">
 	                    </form>
                     
                 </div>

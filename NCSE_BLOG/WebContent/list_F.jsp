@@ -114,7 +114,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="page-head-line">${type}</h4>
 
                 </div>
 
@@ -122,12 +121,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="alert alert-warning">
-    
+ 
 
 
 
 
-
+ 							<h4 class="page-head-line">PJ_board</h4>
 
                             <table class="table table-striped table-bordered table-hover" width="1000" cellpadding="0" cellspacing="0" border="1">
                                     <tr>
@@ -138,7 +137,74 @@
                                         <td>좋아요</td>
                                         <td>싫어요</td>
                                     </tr>
-                                    <c:forEach items="${requestScope.list}" var="dto">
+                                    <c:forEach items="${PJ}" var="dto">
+                                    <tr>
+                                        <td>${dto.bId}</td>
+                                        <td><a href="content_view.do?bid=${dto.bId}">${dto.title}</a></td>
+                                        <td>${dto.id}</td>
+                                        <td>${dto.date}</td>
+                                        <td>${dto.like}</td>
+                                        <td>${dto.disLike}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </table>
+                                
+                                <h4 class="page-head-line">FR_board</h4>
+                                
+                                 <table class="table table-striped table-bordered table-hover" width="1000" cellpadding="0" cellspacing="0" border="1">
+                                    <tr>
+                                        <td>고유번호</td>
+                                        <td>제목</td>
+                                        <td>아이디</td>
+                                        <td>날짜</td>
+                                        <td>좋아요</td>
+                                        <td>싫어요</td>
+                                    </tr>
+                                    <c:forEach items="${FR}" var="dto">
+                                    <tr>
+                                        <td>${dto.bId}</td>
+                                        <td><a href="content_view.do?bid=${dto.bId}">${dto.title}</a></td>
+                                        <td>${dto.id}</td>
+                                        <td>${dto.date}</td>
+                                        <td>${dto.like}</td>
+                                        <td>${dto.disLike}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </table>
+                                <h4 class="page-head-line">ST_board</h4>
+                                
+                                 <table class="table table-striped table-bordered table-hover" width="1000" cellpadding="0" cellspacing="0" border="1">
+                                    <tr>
+                                        <td>고유번호</td>
+                                        <td>제목</td>
+                                        <td>아이디</td>
+                                        <td>날짜</td>
+                                        <td>좋아요</td>
+                                        <td>싫어요</td>
+                                    </tr>
+                                    <c:forEach items="${ST}" var="dto">
+                                    <tr>
+                                        <td>${dto.bId}</td>
+                                        <td><a href="content_view.do?bid=${dto.bId}">${dto.title}</a></td>
+                                        <td>${dto.id}</td>
+                                        <td>${dto.date}</td>
+                                        <td>${dto.like}</td>
+                                        <td>${dto.disLike}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </table>
+                                <h4 class="page-head-line">ITnews_board</h4>
+                                
+                                 <table class="table table-striped table-bordered table-hover" width="1000" cellpadding="0" cellspacing="0" border="1">
+                                    <tr>
+                                        <td>고유번호</td>
+                                        <td>제목</td>
+                                        <td>아이디</td>
+                                        <td>날짜</td>
+                                        <td>좋아요</td>
+                                        <td>싫어요</td>
+                                    </tr>
+                                    <c:forEach items="${ITnews}" var="dto">
                                     <tr>
                                         <td>${dto.bId}</td>
                                         <td><a href="content_view.do?bid=${dto.bId}">${dto.title}</a></td>

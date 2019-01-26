@@ -138,30 +138,35 @@ public class memberDAO
 	public boolean insertDB(memberDTO dto)
 	{
 		boolean result = false;
-		try 
+		
+		Document doc1 = documentMongoCollection.find(new BasicDBObject("user_id", dto.getId())).first();
+		if( doc1 == null)
 		{
-			Document doc = new Document()
-			.append("user_id", dto.getId())
-			.append("user_pwd", dto.getPw())
-			.append("name", dto.getName())
-			.append("nick", dto.getNick())
-			.append("sex", dto.getSex())
-			.append("user_email", dto.getEmail())
-			.append("phone_number", dto.getPhone())
-			.append("user_authority", false)
-			//.append("address", address)
-			.append("platform_link", dto.getPlatform_link())
-			.append("self_imp", dto.getSelf_imp());
-			
-			documentMongoCollection.insertOne(doc);
-			System.out.println("DB »ðÀÔ ¼º°ø");
-			result = true;
-		}
-		catch (Exception e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
+			try 
+			{
+				Document doc = new Document()
+				.append("user_id", dto.getId())
+				.append("user_pwd", dto.getPw())
+				.append("name", dto.getName())
+				.append("nick", dto.getNick())
+				.append("sex", dto.getSex())
+				.append("user_email", dto.getEmail())
+				.append("phone_number", dto.getPhone())
+				.append("user_authority", false)
+				//.append("address", address)
+				.append("platform_link", dto.getPlatform_link())
+				.append("self_imp", dto.getSelf_imp());
+				
+				documentMongoCollection.insertOne(doc);
+				System.out.println("DB »ðÀÔ ¼º°ø");
+				result = true;
+			}
+			catch (Exception e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
 		}
 		
 		return result;

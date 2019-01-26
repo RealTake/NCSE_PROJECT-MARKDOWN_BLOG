@@ -6,17 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.board.dao.boardDAO;
 import com.board.dto.boardDTO;
 
-public class View_BC implements BCommand{
+public class Delete_BC implements BCommand{
 
 	public void excute(HttpServletRequest req, HttpServletResponse res){
-		String bid = req.getParameter("bid");
-
 		boardDAO dao = boardDAO.getInstance();
-		boardDTO dto = dao.viewContent(bid);
+		boardDTO dto = new boardDTO();
 		
-		req.setAttribute("view", dto);
-	
+		dto.setbId(req.getParameter("bid"));
+		dto.setType(req.getParameter("type"));
 		
-		
+		if( req.getSession().getAttribute("user_id") != null)
+			dao.delete(dto, (String)(req.getSession().getAttribute("user_id")));
 	}
 }

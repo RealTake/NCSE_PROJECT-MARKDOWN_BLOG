@@ -3,7 +3,7 @@ package com.board.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.borad.dao.boardDAO;
+import com.board.dao.boardDAO;
 
 public class Comments_BC implements BCommand{
 

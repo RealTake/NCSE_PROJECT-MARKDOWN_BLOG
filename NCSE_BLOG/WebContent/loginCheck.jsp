@@ -1,6 +1,5 @@
-<%@page import="com.member.dao.loginCheck_DB"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,12 +19,12 @@
 	
 	if(id == null || id.equals("") || pw == null || pw.equals(""))
 	{
-		out.print("<script> alert('¾ÆÀÌµğ ¶Ç´Â ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.'); </script>");
+		out.print("<script> alert('ì•„ì´ë”” ë˜ëŠ” íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.'); </script>");
 		out.print("<script> location.href = '"+login+"'; </script>");
 	}
 	else if( ( id.length() > MAX || id.length() < MIN ) || ( pw.length() > MAX || pw.length() < MIN ))
 	{
-		out.print("<script> alert('·Î±×ÀÎ Á¤º¸¸¦ 3 ~ 14 ¾È¿¡ ½áÁÖ¼¼¿ä'); </script>");
+		out.print("<script> alert('ë¡œê·¸ì¸ ì •ë³´ë¥¼ 3 ~ 14 ì•ˆì— ì¨ì£¼ì„¸ìš”'); </script>");
 		out.print("<script> location.href = '"+login+"'; </script>");
 	}
 	else

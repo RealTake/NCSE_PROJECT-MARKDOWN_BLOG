@@ -24,6 +24,7 @@ public class Join_MC implements MCommand {
 		memberDAO dao = memberDAO.getInstance();
 		memberDTO dto = new memberDTO();
 		
+		Boolean check;
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		String pwCheck = req.getParameter("pwCheck");
@@ -45,7 +46,11 @@ public class Join_MC implements MCommand {
 		dto.setPlatform_link(platform_link);
 		dto.setSelf_imp(self_imp);
 		
-		if(dao.insertDB(dto))
+		check = dao.insertDB(dto);
+		
+		req.setAttribute("check", check);
+		
+		if(check)
 		{
 			System.out.println("삽입 프로세스성공");
 		}
