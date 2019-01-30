@@ -129,7 +129,7 @@
 
 
 
-                            <table class="table table-striped table-bordered table-hover" width="1000" cellpadding="0" cellspacing="0" border="1">
+                            <table class="table table-striped table-bordered table-hover" width="100%" cellpadding="0" cellspacing="0" border="1">
                                     <tr>
                                         <td>고유번호</td>
                                         <td>제목</td>

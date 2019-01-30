@@ -21,7 +21,17 @@ public class Write_BC implements BCommand{
 		String con = req.getParameter("content");
 		String type = req.getParameter("type");
 		String id;
-		System.out.println("제목: " + title.length());
+		
+		String reg[] = {"script"};
+		for(int i = 0; i < reg.length; i++)
+		{
+			title = title.replaceAll("<(?i)" + reg[i] + ">", "");
+			title = title.replaceAll("</(?i)" + reg[i] + ">", "");
+			con = con.replaceAll("<(?i)" + reg[i] + ">", "");
+			con = con.replaceAll("</(?i)" + reg[i] + ">", "");
+			System.out.println("내용: " + title);
+		}
+		
 		if((session.getAttribute("user_id") != null) && (title != null && !title.equals("")))
 		{
 			id = (String)(session.getAttribute("user_id"));

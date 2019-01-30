@@ -19,12 +19,13 @@ public class Login_MC implements MCommand
 		
 		Boolean authority = dao.userCheck(id, pw);//Boolean 객체로 해준이유는 jsp 뷰단에서 object를 boolean으로 cast를 해야 오류가 나지않는다.
 		
-		System.out.println("Login_BC: " + authority);
+		System.out.println("Login_MC: " + authority);
 		
 		if(id != null && authority == true)
 		{
 			session.setAttribute("user_id", id);
 		}
+		req.setAttribute("autho", authority);
 	}
 
 }

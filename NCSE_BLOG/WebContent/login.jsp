@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	String check = request.getParameter("check");
 	if(session.getAttribute("user_id") !=null )
 		response.sendRedirect("/");
+	else if(check != null)
+	{
+		if(check.equals("false"))
+			out.print("<script> alert('승인되지않은 계정이거나 없는 계정입니다.\\n아이디와 비번을 다시 한번 확인 해주세요.');</script>");
+	}
+		
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -63,7 +70,7 @@
             </div>
         </div>
     <!-- LOGO HEADER END-->
-   
+    
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">

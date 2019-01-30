@@ -77,7 +77,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			M = new Login_MC();
 			M.excute(req, res);
-			viewPage = ".";
+			viewPage = "login?check=" + req.getAttribute("autho");
 			break;
 			
 		case "/join.do" :

@@ -17,8 +17,15 @@
 	String pw = request.getParameter("pw");
 	String mode = request.getParameter("mode");
 	
-	findAccount f = new findAccount(name, email, id, mode);// 맨 마지막 매개변수는 꼭 id,pwd일것
-	out.print(f.inpuiryAccount());
+	System.out.print("내용: " + id);
+	
+	if((name != null && !name.equals("")) && (email != null && !email.equals("")) && (id != null && !id.equals("")) && (pw != null && !pw.equals("")))
+	{
+		findAccount f = new findAccount(name, email, id, mode);// 맨 마지막 매개변수는 꼭 id,pwd일것
+		out.print(f.inpuiryAccount());
+	}
+	else
+		out.print("<script>alert('내용을 입력하세요')</script>");
 %>
 </body>
 </html>
