@@ -123,6 +123,7 @@ public class mainControl extends HttpServlet {
 			System.out.println(com + " ¿€µø");
 			System.out.println("\n\n\n");
 			M = new Private_MC();
+			mode = false;
 			M.excute(req, res);
 			viewPage = "viewPrivate";
 			break;
