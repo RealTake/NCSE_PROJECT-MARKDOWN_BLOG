@@ -14,6 +14,8 @@ import com.board.dto.boardDTO;
 import com.board.dto.commentDTO;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions.Builder;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -31,6 +33,14 @@ public class boardDAO
 	MongoDatabase DB;
 	MongoCollection<Document> documentMongoCollection;
 
+	Builder options = new Builder();
+    Builder options() 
+    {
+         options.connectionsPerHost(30); // 시작 시 30개의 풀을 만들고 시작
+         options.minConnectionsPerHost(10); // 최소 10개를 유지
+         return options;
+    }
+    
 	private boardDAO()
 	{
 		//DB연결
@@ -50,9 +60,12 @@ public class boardDAO
 	//DB연결
 	private boolean connectMongoDB()
 	{
+
 		try 
 		{
-			mongoClient = new MongoClient("localhost",PORT);
+			MongoClientURI url = new MongoClientURI("mongodb://localhost:27017/plugliquid?maxPoolSize=200",options());
+			mongoClient = new MongoClient(url);
+//			mongoClient = new MongoClient("localhost",27017);
 			DB = mongoClient.getDatabase(DB_NAME);
 			System.out.println("Connected to the database successfully");
 			documentMongoCollection = DB.getCollection(col);

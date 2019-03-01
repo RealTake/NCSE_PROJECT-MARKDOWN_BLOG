@@ -43,20 +43,20 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>list-jsp</servlet-name>
+        <servlet-name>list_jsp</servlet-name>
         <jsp-file>/list.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>list-jsp</servlet-name>
+        <servlet-name>list_jsp</servlet-name>
         <url-pattern>/list</url-pattern>
     </servlet-mapping>
    
     <servlet>
-        <servlet-name>view-jsp</servlet-name>
+        <servlet-name>view_jsp</servlet-name>
         <jsp-file>/view.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>view-jsp</servlet-name>
+        <servlet-name>view_jsp</servlet-name>
         <url-pattern>/view</url-pattern>
     </servlet-mapping>
     
