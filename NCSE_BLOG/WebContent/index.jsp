@@ -79,7 +79,7 @@
                                         <img src="assets/img/64-64.jpg" alt="" class="img-rounded" />
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading">Jhon Deo Alex </h4>
+                                        <h4 class="media-heading">Choi Won Sang </h4>
                                         <h5>Developer & Designer</h5>
 
                                     </div>

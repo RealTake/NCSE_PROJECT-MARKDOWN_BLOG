@@ -44,7 +44,7 @@ public class Write_BC implements BCommand{
 			dto.setId(id);
 			dto.setDate(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()).toString());
 			
-			dao.write(dto);
+			req.setAttribute("bid", dao.write(dto));
 		}
 		req.setAttribute("type", type);
 	}

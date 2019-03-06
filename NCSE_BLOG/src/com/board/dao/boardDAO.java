@@ -171,7 +171,7 @@ public class boardDAO
 	}
 	
 	//글쓰기
-	public void write(boardDTO dto)
+	public String write(boardDTO dto)
 	{
 		
 		List<BasicDBObject> board = new ArrayList<BasicDBObject>();
@@ -184,8 +184,13 @@ public class boardDAO
 		.append("board_dislike", 0));
 		
 		Document doc = new Document().append(dto.getType(), board).append("comments", new ArrayList());
-		
 		documentMongoCollection.insertOne(doc);
+		
+		String temp = doc.getObjectId("_id").toStringMongod();
+		System.out.println("===================" + temp);
+		
+		return temp;
+		
 	}
 	
 	//검색목록 가져오기
