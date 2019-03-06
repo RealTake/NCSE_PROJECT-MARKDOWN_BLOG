@@ -116,7 +116,7 @@ public class mainControl extends HttpServlet {
 			System.out.println("\n\n\n");
 			B = new Write_BC();
 			B.excute(req, res);
-			viewPage = "content_view.do?bid=" + req.getAttribute("bid") + "&type=" + req.getAttribute("type");
+			viewPage = "content_view.do?bid=" + req.getAttribute("bid");
 			break;
 			
 		case "/private.do" :
